@@ -1,0 +1,70 @@
+Create User POST http://127.0.0.1:5000/v1/user/
+
+{
+	"first_name": "Maeve",
+	"last_name": "Wiley",
+	"email_address": "maeve@wiley.com",
+	"password": "mavely123"
+}
+
+{
+	"first_name": "Tanaji",
+	"last_name": "James",
+	"email_address": "xchakravarty@gmail.com",
+	"password": "srinjoy93"
+}
+
+{
+	"first_name": "Will",
+	"last_name": "Smiths",
+	"email_address": "ssmith@yahoo.com",
+	"password": "st3ven$124A"
+}
+
+{
+    "jwt_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Nzk4MTUzNzYsImlhdCI6MTU3OTcyODk3Niwic3ViIjoiMGRmNDBjYWQtN2UyZC00MWIzLWJhNWMtNTVlNTA3Njc5YjFjIn0.qsLqlV9ovapSkTOh5rG8HTR1HVGnroTvbQS54DaiqcY"
+}
+
+                  eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Nzk4MTU3OTgsImlhdCI6MTU3OTcyOTM5OCwic3ViIjoiMGRmNDBjYWQtN2UyZC00MWIzLWJhNWMtNTVlNTA3Njc5YjFjIn0.x6iCr9cU3zCt8BYYttxNtYRomW_Rsx4bYPoS5UPhJsM
+
+{
+	"first_name": "Jason",
+	"last_name": "Roy",
+	"email_address": "jason.roy@gmail.com",
+	"password": "jasonRoy$123"
+}
+
+
+Login POST http://127.0.0.1:5000/v1/user/login
+{
+	"email_address": "maeve@wiley.com",
+	"password": "mavely123"
+}
+
+Login POST http://127.0.0.1:5000/v1/user/login
+{
+	"email_address": "xchakravarty@gmail.com",
+	"password": "srinjoy93"
+}
+
+Get Self GET http://127.0.0.1:5000/v1/user/self
+
+
+{
+	"first_name": "Christian",
+	"last_name": "Eriksen",
+	"email_address": "inter@milan.com",
+	"password": "Erik$en123"
+}
+
+{
+	"first_name": "Ngolo",
+	"last_name": "Kanta",
+	"email_address": "ngolo@spurs.com",
+	"password": "ngolo@23Kan"
+}
+
+Update Self Put http://127.0.0.1:5000/v1/user/self
+{
+	"first_name": "Christian"
+}

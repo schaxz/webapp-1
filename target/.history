@@ -1,0 +1,4 @@
+trait Option [x] { def isDefined: Boolean def get = x}
+trait Option [x] { def isDefined: Boolean def get = x def getOrElse (x:=> defaultValue): x};
+trait Option [x] { def isDefined: Boolean def get = x def getOrElse (x:=> defaultValue): x} ;
+trait Option [x] { def isDefined: Boolean def get = x def getOrElse (x:=> defaultValue): x def map(f: x => y): Option[y]} ;
