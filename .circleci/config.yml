@@ -1,0 +1,37 @@
+version: 2.1
+jobs:
+  run_tests:
+    docker:
+      - image: circleci/postgres:9.6.5-alpine-ram  # runs in-memory so does not hit disk to significantly improve test performance on Postgresql
+        environment:
+          POSTGRES_USER: postgres # sets POSTGRES_USER environment variable in CircleCI config to postgres to add role to image
+    steps:
+      - checkout
+      - run: sudo apt-get install postgresql-client-9.6
+      - run: sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade && sudo apt-get autoremove && sudo apt-get autoclean
+      - run: whoami
+      - run:
+          name: Setup Bash Environment, Activate Virtual Environment & Install Python 3 Dependencies
+          command: |
+            echo 'export PATH=~PATH:~/.local/bin' >> $BASH_ENV && source $BASH_ENV
+            python3 -m venv venv
+            . venv/bin/activate
+            sudo pip3 install -r requirements.txt
+      - run: |
+          psql -d $TEST_DATABASE_URL -c "CREATE TABLE users (name char(25));"
+      - run: |
+          psql -d $TEST_DATABASE_URL -c "INSERT INTO users VALUES ('Eriksen'), ('Kanta'), ('Smiths'), ('Wiley');"
+      - run: |
+          psql -d $TEST_DATABASE_URL -c "SELECT * from public.users"
+      - run:
+          name: Run User Unit Test
+          command: |
+            pytest --junitxml=test-reports/junit.xml --html=test-reports/pytest_report.html --self-contained-html
+      - store_test_results:
+          path: test-reports
+      - store_artifacts:
+          path: test-reports
+workflows:
+  build_test:
+    jobs:
+      - run_tests

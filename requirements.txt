@@ -78,6 +78,7 @@ Flask-Bcrypt==0.7.1
 Flask-Compress==1.4.0
 Flask-Gravatar==0.4.2
 Flask-HTTPAuth==3.3.0
+Flask-JWT-Extended==3.24.1
 Flask-Login==0.4.0
 Flask-Mail==0.9.1
 flask-marshmallow==0.10.1
@@ -85,8 +86,10 @@ Flask-Migrate==2.1.1
 Flask-Paranoid==0.2.0
 Flask-Principal==0.4.0
 Flask-Script==2.0.6
+Flask-SeaSurf==0.2.2
 Flask-Security==1.7.5
 Flask-SQLAlchemy==2.4.1
+flask-talisman==0.7.0
 Flask-WTF==0.14.2
 funcsigs==1.0.2
 future==0.17.1
@@ -242,7 +245,7 @@ pyRFC3339==1.0
 pyrsistent==0.15.7
 pysha3==1.0.2
 pytest==5.3.2
-python-apt==1.6.4
+python-apt==1.6.5+ubuntu0.2
 python-dateutil==2.6.1
 python-debian==0.1.32
 python-debianbts==2.7.2
