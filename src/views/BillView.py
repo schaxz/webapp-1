@@ -7,6 +7,7 @@ from flask_httpauth import HTTPBasicAuth
 import uuid
 
 bill_api = Blueprint('bill_api', __name__)
+user_schema = UserSchema()
 bill_schema = BillSchema()
 auth = HTTPBasicAuth()
 
@@ -29,6 +30,7 @@ def create():
   return custom_response(ser_data, 201)
 
 @bill_api.route('/', methods=['GET'])
+@auth.login_required
 def get_all():
   """
   Get All Bills
@@ -39,6 +41,29 @@ def get_all():
   bills = BillModel.get_bills_by_owner_id(user_id)
   data = bill_schema.dump(bills, many = True)
   return custom_response(data, 200)
+
+@bill_api.route('/<string:bill_id>', methods=['GET'])
+@auth.login_required
+def get_one(bill_id):
+  """
+  Get A Bill
+  """
+  bill = BillModel.get_one_bill(bill_id)
+  if not bill:
+    return custom_response({'error': 'bill not found'}, 404)
+
+  email_address_in_auth_header = request.authorization.username
+  user_object = UserModel.get_user_by_email(email_address_in_auth_header)
+  user_id = user_object.id
+
+  if (user_id != bill.owner_id):
+      return custom_response({'error': 'unauthorized to access bill'}, 401)
+
+  data = bill_schema.dump(bill)
+  return custom_response(data, 200)
+
+
+
 
 def custom_response(res, status_code):
   """
@@ -59,6 +84,5 @@ def authenticate(username, password):
             return False
         else:
             ser_user = user_schema.dump(user_object)
-            print(ser_user)
             return custom_response(ser_user, 200)
     return False
