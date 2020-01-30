@@ -1,4 +1,9 @@
-# Prerequisites for building and deploying application locally
+# Assignment 3
+
+![CSYE 6250 Cloud Engineering and Network Structure | Spring 2020 [BOS-2-TR]](https://i.ytimg.com/vi/ZFb01yTR9bA/maxresdefault.jpg)
+
+
+## Prerequisites for building and deploying application locally
 
 Open a Terminal and Change Directory to Home
 
