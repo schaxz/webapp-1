@@ -50,8 +50,8 @@ def create():
           password_error = 'Password should have at least one of the symbols $ @ # % ! ^ & * ( )'
           valid_password = False
       if valid_password:
-          new_uuid = uuid.uuid4()
           data = user_schema.load(req_data)
+          new_uuid = uuid.uuid4()
           data.update({'id': str(new_uuid)})
           user = UserModel(data)
           user.save()

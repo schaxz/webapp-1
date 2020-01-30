@@ -28,6 +28,7 @@ class BillModel(db.Model):
 
   # class constructor
   def __init__(self, data):
+    self.id = data.get('id')
     self.vendor = data.get('vendor')
     self.bill_date = data.get('bill_date')
     self.due_date = data.get('due_date')
@@ -67,7 +68,7 @@ class BillSchema(Schema):
   """
   Bill Schema
   """
-  id = fields.Int(dump_only = True)
+  id = fields.Str(dump_only = True)
   vendor = fields.Str(required = True)
   owner_id = fields.Str(required = True, dump_only = True)
   created_ts = fields.DateTime(dump_only = True)
