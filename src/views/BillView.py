@@ -80,9 +80,23 @@ def update(bill_id):
   updated_date = bill_schema.dump(bill)
   return custom_response(updated_date, 200)
 
-
-
-
+@bill_api.route('/<string:bill_id>', methods=['DELETE'])
+@auth.login_required
+def delete(bill_id):
+  """
+  Delete An Authorized Bill
+  """
+  bill = BillModel.get_one_bill(bill_id)
+  if not bill:
+    return custom_response({'error': 'Bil Not Found'}, 404)
+  data = bill_schema.dump(bill)
+  email_address_in_auth_header = request.authorization.username
+  user_object = UserModel.get_user_by_email(email_address_in_auth_header)
+  user_id = user_object.id
+  if (data.get('owner_id') != user_id):
+    return custom_response({'error': 'Unauthorized to Delete Bill'}, 401)
+  bill.delete()
+  return custom_response({'message': 'Deleted Successfully'}, 204)
 
 def custom_response(res, status_code):
   """
