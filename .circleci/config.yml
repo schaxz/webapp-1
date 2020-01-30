@@ -19,10 +19,10 @@ jobs:
           psql -d $TEST_DATABASE_URL -c "INSERT INTO test VALUES ('Wiley'), ('Kanta'), ('Eriksen');"
       - run: |
           psql -d $TEST_DATABASE_URL -c "SELECT * from test"
-      # - run:
-      #     name: Run User Unit Test
-      #     command: |
-      #       python3 -m pytest
+      - run:
+          name: Run User Unit Test
+          command: |
+            python3 -m pytest
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers # Primary container image where all commands run
@@ -30,7 +30,7 @@ jobs:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
       - image: circleci/postgres:9.6.5-alpine-ram # Service container image
     steps:
-      # - checkout
+      - checkout
       # - run: sudo apt-get update
       # - run: sudo apt-get install postgresql-client-9.6
       # - run: pip install --upgrade pip --user
