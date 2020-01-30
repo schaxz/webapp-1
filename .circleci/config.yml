@@ -48,6 +48,7 @@ jobs:
             python3 -m pytest
 workflows:
   version: 2.1
-  jobs:
+  pr-check-and-build:
+    jobs:
     - pr-check
     - build
