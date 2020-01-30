@@ -42,10 +42,10 @@ jobs:
       #     psql -d $TEST_DATABASE_URL -c "INSERT INTO test VALUES ('Wiley'), ('Kanta'), ('Eriksen');"
       # - run: |
       #     psql -d $TEST_DATABASE_URL -c "SELECT * from test"
-      - run:
-          name: Run User Unit Test
-          command: |
-            python3 -m pytest
+      # - run:
+      #     name: Run User Unit Test
+      #     command: |
+      #       python3 -m pytest
 workflows:
   version: 2.1
   pr-check-and-build:
