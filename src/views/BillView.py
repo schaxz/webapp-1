@@ -46,21 +46,40 @@ def get_all():
 @auth.login_required
 def get_one(bill_id):
   """
-  Get A Bill
+  Get Authorized Bill
   """
   bill = BillModel.get_one_bill(bill_id)
   if not bill:
-    return custom_response({'error': 'bill not found'}, 404)
-
+    return custom_response({'error': 'Bill Not Found'}, 404)
   email_address_in_auth_header = request.authorization.username
   user_object = UserModel.get_user_by_email(email_address_in_auth_header)
   user_id = user_object.id
-
   if (user_id != bill.owner_id):
-      return custom_response({'error': 'unauthorized to access bill'}, 401)
-
+      return custom_response({'error': 'Unauthorized Access to Bill'}, 401)
   data = bill_schema.dump(bill)
   return custom_response(data, 200)
+
+@bill_api.route('/<string:bill_id>', methods=['PUT'])
+@auth.login_required
+def update(bill_id):
+  """
+  Update An Authorized Bill
+  """
+  req_data = request.get_json(force = True)
+  bill = BillModel.get_one_bill(bill_id)
+  if not bill:
+    return custom_response({'error': 'Bill Not Found'}, 404)
+  data = bill_schema.dump(bill)
+  email_address_in_auth_header = request.authorization.username
+  user_object = UserModel.get_user_by_email(email_address_in_auth_header)
+  user_id = user_object.id
+  if (data.get('owner_id') != user_id):
+    return custom_response({'error': 'Permission Denied'}, 400)
+  data_to_be_updated = bill_schema.load(req_data, partial = True)
+  bill.update(data_to_be_updated)
+  updated_date = bill_schema.dump(bill)
+  return custom_response(updated_date, 200)
+
 
 
 

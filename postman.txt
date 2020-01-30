@@ -4,7 +4,7 @@ Create User POST http://127.0.0.1:5000/v1/user/
 	"first_name": "Bob",
 	"last_name": "Riley",
 	"email_address": "bob@riley.com",
-	"password": ""Bobriley$1"
+	"password": "Bobriley$1"
 }
 
 {
