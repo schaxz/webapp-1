@@ -33,7 +33,7 @@ foo@bar:~$ CREATE TABLE bills (
 );
 ```
 
-Open a new terminal and install PGAdmin for a nice GUI to monitor your local database
+Open your favourite terminal and install PGAdmin for a nice GUI to monitor your local database
 
 ```console
 foo@bar:~$ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
