@@ -20,14 +20,16 @@ jobs:
       - run: pip install --upgrade pip --user
       - run: pip3 install -r requirements.txt
       - run: |
-          psql \
-          -d $TEST_DATABASE_URL \
-          -c "CREATE TABLE test (name char(25));"
+          psql -d $TEST_DATABASE_URL -c "CREATE TABLE test (name char(25));"
       - run: |
-          psql \
-          -d $TEST_DATABASE_URL \
-          -c "INSERT INTO test VALUES ('Wiley'), ('Kanta'), ('Eriksen');"
+          psql -d $TEST_DATABASE_URL -c "INSERT INTO test VALUES ('Wiley'), ('Kanta'), ('Eriksen');"
       - run: |
-          psql \
-          -d $TEST_DATABASE_URL \
-          -c "SELECT * from test"
+          psql -d $TEST_DATABASE_URL -c "SELECT * from test"
+      - run:
+          name: Run User Unit Test
+          command: |
+            pytest --junitxml=test-reports/junit.xml --html=test-reports/pytest_report.html --self-contained-html
+      - store_test_results:
+          path: test-reports
+      - store_artifacts:
+          path: test-reports
