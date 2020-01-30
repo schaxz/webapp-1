@@ -24,11 +24,7 @@ foo@bar:~$ sudo -u postgres psql
 
 Create your sample database with the following SQL queries
 ```console
-foo@bar:~$ CREATE TABLE users (
-    column_name1 col_type (field_length) column_constraints,
-    column_name2 col_type (field_length),
-    column_name3 col_type (field_length)
-);
+foo@bar:~$ CREATE TABLE users ( id PRIMARY KEY UNIQUE, first_name VARCHAR (50) NOT NULL, last_name VARCHAR (50) NOT NULL, email_address VARCHAR (50) UNIQUE NOT NULL, password VARCHAR (50) NOT NULL, account_created TIMESTAMP, account_updated TIMESTAMP );
 
 foo@bar:~$ CREATE TABLE bills (
     column_name1 col_type (field_length) column_constraints,

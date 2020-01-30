@@ -14,15 +14,17 @@ jobs:
       - run: pip3 install -r requirements.txt
       - run: pip3 install -U pytest
       - run: |
-          psql -d $TEST_DATABASE_URL -c "CREATE TABLE test (name char(25));"
+          psql -d $TEST_DATABASE_URL -c "CREATE TABLE users (id PRIMARY KEY UNIQUE, first_name VARCHAR (50) NOT NULL, last_name VARCHAR (50) NOT NULL, email_address VARCHAR (50) UNIQUE NOT NULL, password VARCHAR (50) NOT NULL, account_created TIMESTAMP, account_updated TIMESTAMP);"
+
       - run: |
-          psql -d $TEST_DATABASE_URL -c "INSERT INTO test VALUES ('Wiley'), ('Kanta'), ('Eriksen');"
+          psql -d $TEST_DATABASE_URL -c "INSERT INTO users (id, first_name, last_name, email_address, password, account_created, account_updated) VALUES ('Bob', 'Riley', 'bob@riley.com', 'Bobriley$1'), ('Di', 'Hongdei', 'di@hongefil.com', 'di1234REAT&');"
+
       - run: |
-          psql -d $TEST_DATABASE_URL -c "SELECT * from test"
-      - run:
-          name: Run User Unit Test
-          command: |
-            python3 -m pytest
+          psql -d $TEST_DATABASE_URL -c "SELECT * from users"
+      # - run:
+      #     name: Run User Unit Test
+      #     command: |
+      #       python3 -m pytest
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers # Primary container image where all commands run

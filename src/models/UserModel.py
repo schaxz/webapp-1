@@ -14,7 +14,7 @@ class UserModel(db.Model):
   first_name = db.Column(db.String(128), nullable = False)
   last_name = db.Column(db.String(128), nullable = False)
   email_address = db.Column(db.String(128), unique = True, nullable = False)
-  password = db.Column(db.String(128), nullable = True)
+  password = db.Column(db.String(128), nullable = False)
   account_created = db.Column(db.DateTime)
   account_updated = db.Column(db.DateTime)
   bills = db.relationship('BillModel', backref = 'users', lazy = True)
