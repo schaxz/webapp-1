@@ -8,6 +8,7 @@ itsdangerous
 Mako
 MarkupSafe
 psycopg2-binary
+pytest
 python-dateutil
 python-editor
 six
