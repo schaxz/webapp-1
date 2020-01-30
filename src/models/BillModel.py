@@ -58,6 +58,10 @@ class BillModel(db.Model):
     return BillModel.query.all()
 
   @staticmethod
+  def get_bills_by_owner_id(value):
+    return BillModel.query.filter_by(owner_id = value).all()
+
+  @staticmethod
   def get_one_bill(id):
     return BillModel.query.get(id)
 

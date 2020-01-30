@@ -7,7 +7,12 @@ Create User POST http://127.0.0.1:5000/v1/user/
 	"password": ""Bobriley$1"
 }
 
-
+{
+	"first_name": "Di",
+	"last_name": "Hongdei",
+	"email_address": "di@hongefil.com",
+	"password": "di1234REAT&"
+}
 
 {
 	"first_name": "Jason",
@@ -55,4 +60,15 @@ Get Self GET http://127.0.0.1:5000/v1/user/self
 Update Self Put http://127.0.0.1:5000/v1/user/self
 {
 	"first_name": "Christian"
+}
+
+
+Create New Bill POST http://127.0.0.1:5000/v1/bill/
+{
+  "vendor": "Mathworks",
+  "bill_date": "2020-11-11",
+  "due_date": "2021-10-09",
+  "amount_due": 1000,
+  "categories": ["spring2020"],
+  "paymentStatus": "due"
 }

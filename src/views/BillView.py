@@ -28,6 +28,18 @@ def create():
   ser_data = bill_schema.dump(bill_object)
   return custom_response(ser_data, 201)
 
+@bill_api.route('/', methods=['GET'])
+def get_all():
+  """
+  Get All Bills
+  """
+  email_address_in_auth_header = request.authorization.username
+  user_object = UserModel.get_user_by_email(email_address_in_auth_header)
+  user_id = user_object.id
+  bills = BillModel.get_bills_by_owner_id(user_id)
+  data = bill_schema.dump(bills, many = True)
+  return custom_response(data, 200)
+
 def custom_response(res, status_code):
   """
   Custom Response Function
