@@ -49,6 +49,6 @@ jobs:
 workflows:
   version: 2.1
   pr-check-and-build:
-  jobs:
+    jobs:
     - pr-check
     - build
