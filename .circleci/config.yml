@@ -47,6 +47,7 @@ jobs:
           command: |
             python3 -m pytest
 workflows:
+  version: 2.1
   jobs:
     - pr-check
     - build
