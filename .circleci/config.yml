@@ -14,14 +14,11 @@ jobs:
       - run: pip3 install -r requirements.txt
       - run: pip3 install -U pytest
       - run: |
-          psql -d $TEST_DATABASE_URL -c "CREATE TABLE weather ( city            varchar(80), temp_lo         int,           -- low temperature temp_hi         int,           -- high temperature prcp            real,          -- precipitation date            date );"
-
-
+          psql -d $TEST_DATABASE_URL -c "CREATE TABLE test (name char(25));"
       - run: |
-          psql -d $TEST_DATABASE_URL -c "INSERT INTO users (id, first_name, last_name, email_address, password, account_created, account_updated) VALUES ('Bob', 'Riley', 'bob@riley.com', 'Bobriley$1'), ('Di', 'Hongdei', 'di@hongefil.com', 'di1234REAT&');"
-
+          psql -d $TEST_DATABASE_URL -c "INSERT INTO test VALUES ('Wiley'), ('Kanta'), ('Eriksen');"
       - run: |
-          psql -d $TEST_DATABASE_URL -c "SELECT * from users"
+          psql -d $TEST_DATABASE_URL -c "SELECT * from test"
       # - run:
       #     name: Run User Unit Test
       #     command: |
